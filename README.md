@@ -27,8 +27,5 @@
 - **Automation:** Selenium WebDriver for .NET
 
 ## Команда
--
--
--
--
-
+- Максим Коваль
+- Богдан Артим
