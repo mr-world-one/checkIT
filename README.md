@@ -21,7 +21,7 @@
 У проєкті ми використовуємо сучасний стек **.NET**:
 
 - **Frontend:** WPF / WinUI 3  
-- **Backend & Services:** .NET 8 (C#)  
+- **Backend & Services:** .NET 9 (C#)  
 - **Database:** PostgreSQL (через EF Core або Dapper)  
 - **Data Access:** Entity Framework Core, Dapper  
 - **Automation:** Selenium WebDriver for .NET
