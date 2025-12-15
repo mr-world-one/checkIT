@@ -1,0 +1,135 @@
+﻿<Window x:Class="Check_IT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:Check_IT.Views"
+        Title="Check_IT" WindowStartupLocation="CenterScreen"
+        Style="{StaticResource AppWindow}"
+        WindowState="Maximized">
+    <Window.Resources>
+        <Storyboard x:Key="HeaderAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)"
+                            To="1" Duration="0:0:1" From="0"/>
+        </Storyboard>
+        <Storyboard x:Key="GradientAnimation">
+            <ColorAnimation Storyboard.TargetName="GradientStart"
+                            Storyboard.TargetProperty="Color"
+                            To="#2ecc71" Duration="0:0:6" AutoReverse="True" RepeatBehavior="Forever" />
+            <ColorAnimation Storyboard.TargetName="GradientEnd"
+                            Storyboard.TargetProperty="Color"
+                            To="#27ae60" Duration="0:0:6" AutoReverse="True" RepeatBehavior="Forever" />
+        </Storyboard>
+
+        <!-- Стиль для кнопки з іконкою -->
+        <Style x:Key="HeaderIconButton" TargetType="Button" BasedOn="{StaticResource HeaderButton}">
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.95"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Анімація іконки -->
+        <Storyboard x:Key="MenuIconAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                            To="1.1" Duration="0:0:0.2" AutoReverse="True" RepeatBehavior="1x"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                            To="1.1" Duration="0:0:0.2" AutoReverse="True" RepeatBehavior="1x"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Анімований хедер -->
+        <Border DockPanel.Dock="Top" Height="120">
+            <Border.Background>
+                <LinearGradientBrush x:Name="HeaderGradient" StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop x:Name="GradientStart" Color="#27ac0f" Offset="0"/>
+                    <GradientStop x:Name="GradientEnd" Color="#41ec22" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="220"/>
+                </Grid.ColumnDefinitions>
+                <!-- Логотип -->
+                <Image Source="pack://application:,,,/Check_IT;component/assets/picture.png"
+                       Height="80" Margin="15" Grid.Column="0" VerticalAlignment="Center"/>
+                <!-- Титульний текст -->
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock>
+                        <Run Text="check" Foreground="#35f816" FontSize="48"/>
+                        <Run Text=" IT" Foreground="{StaticResource AccentRed}" FontSize="48"/>
+                    </TextBlock>
+                    <TextBlock Text="Технологія чесності" FontFamily="{StaticResource RalewayFont}" FontSize="18"
+                               Foreground="White" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <!-- Кнопка меню з анімацією (білий фон, чорні букви) -->
+                <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0">
+                    <Button Style="{StaticResource HeaderIconButton}" Click="MenuButton_Click"
+                            RenderTransformOrigin="0.5,0.5">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </Button.RenderTransform>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Viewbox Width="36" Height="36" Stretch="Uniform">
+                                <Canvas Width="20" Height="20">
+                                    <!-- burger lines filled black -->
+                                    <Rectangle Width="20" Height="2" Canvas.Left="0" Canvas.Top="6"
+                                               Fill="Black" RadiusX="1" RadiusY="1"/>
+                                    <Rectangle Width="20" Height="2" Canvas.Left="0" Canvas.Top="10"
+                                               Fill="Black" RadiusX="1" RadiusY="1"/>
+                                    <Rectangle Width="20" Height="2" Canvas.Left="0" Canvas.Top="14"
+                                               Fill="Black" RadiusX="1" RadiusY="1"/>
+                                </Canvas>
+                            </Viewbox>
+                            <TextBlock Text="Menu" Margin="8,0" VerticalAlignment="Center" Foreground="Black" FontSize="16"/>
+                        </StackPanel>
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard Storyboard="{StaticResource MenuIconAnimation}"/>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!-- Статусбар -->
+        <StatusBar DockPanel.Dock="Bottom" Height="40">
+            <TextBlock Text="© 2025. All rights are reserved." FontSize="12" Height="27" Width="381"/>
+        </StatusBar>
+        <!-- Основний контент -->
+        <Border Background="White" CornerRadius="15" Margin="30" Padding="20">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <views:HomeView />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource HeaderAnimation}"/>
+            <BeginStoryboard Storyboard="{StaticResource GradientAnimation}" />
+        </EventTrigger>
+    </Window.Triggers>
+</Window>

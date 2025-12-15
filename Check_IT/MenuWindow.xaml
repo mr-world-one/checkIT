@@ -1,0 +1,188 @@
+<Window x:Class="Check_IT.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Menu" Height="400" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Background="Transparent"
+        AllowsTransparency="True" WindowStyle="None">
+	<Window.Resources>
+		<LinearGradientBrush x:Key="MenuBackground" StartPoint="0,0" EndPoint="0,1">
+			<GradientStop Color="#FFFFFF" Offset="0"/>
+			<GradientStop Color="#F9F9F9" Offset="1"/>
+		</LinearGradientBrush>
+		<SolidColorBrush x:Key="MenuForeground" Color="#1A1A1A"/>
+
+		<SolidColorBrush x:Key="MenuGreenAccent" Color="#27ac0f"/>
+		<SolidColorBrush x:Key="MenuGreenHover" Color="#2ecc71"/>
+		<SolidColorBrush x:Key="MenuGreenPressed" Color="#27ae60"/>
+
+		<Color x:Key="MenuGreenHoverColor">#FF2ECC71</Color>
+		<Color x:Key="MenuGreenPressedColor">#FF27AE60</Color>
+
+		<SolidColorBrush x:Key="MenuRedAccent" Color="#f00808"/>
+
+		<SolidColorBrush x:Key="MenuRedHover" Color="#ff3333"/>
+
+		<SolidColorBrush x:Key="MenuRedPressed" Color="#cc0000"/>
+
+		<Color x:Key="MenuRedHoverColor">#FFFF3333</Color>
+		<Color x:Key="MenuRedPressedColor">#FFCC0000</Color>
+
+		<DropShadowEffect x:Key="ButtonShadow" Color="#000000" BlurRadius="10" ShadowDepth="0" Opacity="0.2"/>
+
+		<Style TargetType="TextBlock">
+			<Setter Property="Foreground" Value="{StaticResource MenuForeground}"/>
+			<Setter Property="FontFamily" Value="{StaticResource RubikFont}"/>
+		</Style>
+
+		<Style x:Key="MenuButtonStyle" TargetType="Button">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Foreground" Value="{StaticResource MenuForeground}"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Padding" Value="16,12"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="12"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True"
+                                Effect="{StaticResource ButtonShadow}">
+							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="Bd" Property="Background" Value="#F0F0F0"/>
+								<Setter Property="Effect">
+									<Setter.Value>
+										<DropShadowEffect Color="{StaticResource MenuGreenHoverColor}" BlurRadius="15" ShadowDepth="0" Opacity="0.7"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter TargetName="Bd" Property="Background" Value="#E0E0E0"/>
+								<Setter Property="Effect">
+									<Setter.Value>
+										<DropShadowEffect Color="{StaticResource MenuGreenPressedColor}" BlurRadius="20" ShadowDepth="0" Opacity="0.9"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False">
+								<Setter Property="Foreground" Value="#888888"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style x:Key="MenuPrimaryButtonStyle" BasedOn="{StaticResource MenuButtonStyle}" TargetType="Button">
+			<Setter Property="Background" Value="{StaticResource MenuRedAccent}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Padding" Value="12,10"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="14" Padding="{TemplateBinding Padding}">
+							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="Bd" Property="Background" Value="{StaticResource MenuRedHover}"/>
+								<Setter Property="Effect">
+									<Setter.Value>
+										<DropShadowEffect Color="{StaticResource MenuRedHoverColor}" BlurRadius="20" ShadowDepth="0" Opacity="0.8"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter TargetName="Bd" Property="Background" Value="{StaticResource MenuRedPressed}"/>
+								<Setter Property="Effect">
+									<Setter.Value>
+										<DropShadowEffect Color="{StaticResource MenuRedPressedColor}" BlurRadius="25" ShadowDepth="0" Opacity="1"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style x:Key="MenuSuccessButtonStyle" BasedOn="{StaticResource MenuButtonStyle}" TargetType="Button">
+			<Setter Property="Background" Value="{StaticResource MenuGreenAccent}"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Padding" Value="12,10"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="14" Padding="{TemplateBinding Padding}">
+							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="Bd" Property="Background" Value="{StaticResource MenuGreenHover}"/>
+								<Setter Property="Effect">
+									<Setter.Value>
+										<DropShadowEffect Color="{StaticResource MenuGreenHoverColor}" BlurRadius="20" ShadowDepth="0" Opacity="0.8"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter TargetName="Bd" Property="Background" Value="{StaticResource MenuGreenPressed}"/>
+								<Setter Property="Effect">
+									<Setter.Value>
+										<DropShadowEffect Color="{StaticResource MenuGreenPressedColor}" BlurRadius="25" ShadowDepth="0" Opacity="1"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+	</Window.Resources>
+
+	<Border Background="{StaticResource MenuBackground}" CornerRadius="20" Padding="20" Margin="10"
+            Effect="{StaticResource ButtonShadow}">
+		<Border.Triggers>
+			<EventTrigger RoutedEvent="Loaded">
+				<BeginStoryboard>
+					<Storyboard>
+						<DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                        To="1" Duration="0:0:0.3" From="0"/>
+					</Storyboard>
+				</BeginStoryboard>
+			</EventTrigger>
+		</Border.Triggers>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid>
+				<TextBlock Text="Menu" FontSize="24" FontWeight="Bold" Margin="6,0,0,12" VerticalAlignment="Top"/>
+				<Button Width="32" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CloseButton_Click"
+					ToolTip="Close" Background="Transparent" BorderBrush="Transparent" Foreground="{StaticResource MenuForeground}" FontWeight="Bold" Content="✕"/>
+			</Grid>
+			<StackPanel Grid.Row="1" Margin="0,12,0,0">
+				<Button Style="{StaticResource MenuButtonStyle}" Content="Home" Click="Home_Click"/>
+				<Button Style="{StaticResource MenuButtonStyle}" Content="About" Click="About_Click"/>
+				<Button Style="{StaticResource MenuButtonStyle}" Content="Analyze public" Click="AnalyzePublic_Click"/>
+				<Button Style="{StaticResource MenuButtonStyle}" Content="Analyze private" Click="AnalyzePrivate_Click"/>
+				<Button Style="{StaticResource MenuButtonStyle}" Content="Logout" Click="Logout_Click"/>
+			</StackPanel>
+			<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+				<Button Style="{StaticResource MenuSuccessButtonStyle}" Width="120" Content="Sign Up" Click="SignUp_Click" Margin="0,0,8,0"/>
+				<Button Style="{StaticResource MenuPrimaryButtonStyle}" Width="120" Content="Sign In" Click="Login_Click"/>
+			</StackPanel>
+		</Grid>
+	</Border>
+</Window>

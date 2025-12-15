@@ -1,0 +1,54 @@
+<Window x:Class="Check_IT.PrivateTenderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Private Tenders - Excel" Height="640" Width="900"
+        WindowStartupLocation="CenterOwner" ResizeMode="CanResize" Style="{StaticResource AppWindow}">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header (texts are set from code-behind to avoid encoding issues) -->
+        <StackPanel Grid.Row="0" Margin="0,4">
+            <TextBlock x:Name="HeaderTitle" FontSize="22" FontWeight="Bold"/>
+            <TextBlock x:Name="HeaderSubtitle" FontSize="14" Opacity="0.85" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- Drop area -->
+        <Border Grid.Row="1" CornerRadius="10" BorderThickness="2" BorderBrush="{StaticResource PrimaryGradient}" Background="White"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="12" AllowDrop="True"
+                Drop="DropArea_Drop" DragOver="DropArea_DragOver">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="220"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock x:Name="DropHint" Text="Drop an Excel file here, or click Select file" FontSize="14" Foreground="{StaticResource TextDark}"/>
+                    <TextBlock x:Name="SelectedFileName" FontSize="13" Margin="0,12,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical">
+                    <Button x:Name="SelectFileButton" Style="{StaticResource PrimaryButton}" Click="SelectFileButton_Click" Width="200" Margin="0,0,0,8">Select file</Button>
+                    <Button x:Name="ProcessButton" Style="{StaticResource PrimaryButton}" Click="ProcessButton_Click" Width="200" IsEnabled="False">Analyze</Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Small info -->
+        <TextBlock Grid.Row="2" x:Name="InfoText" FontSize="12" Margin="0,10,0,6" Opacity="0.85" TextWrapping="Wrap"/>
+
+        <!-- Results -->
+        <DataGrid Grid.Row="3" x:Name="ResultsGrid" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding ComparisonItems}" Margin="0,8,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="ExcelPrice" Binding="{Binding Price}" Width="180"/>
+                <DataGridTextColumn Header="RozetkaPrice" Binding="{Binding RozetkaPrice}" Width="220"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
