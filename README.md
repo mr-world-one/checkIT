@@ -24,7 +24,6 @@
 - **Backend & Services:** .NET 9 (C#)  
 - **Database:** PostgreSQL (через EF Core або Dapper)  
 - **Data Access:** Entity Framework Core, Dapper  
-- **Automation:** Selenium WebDriver for .NET
 
 ## Команда
 - Максим Коваль
